@@ -1,0 +1,12 @@
+
+=== OnvifSDK ===
+### desc ###
+library implements ONVIF specification; library interface described in OnvifSDK.h
+### prerequisites ###
+WsDiscovery
+### build ###
+mkdir OnvifSDK-build
+cd  OnvifSDK-build
+cmake ../OnvifSDK -DWSDD=../path/to/WsDiscovery-build
+make
+

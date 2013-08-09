@@ -1,0 +1,13 @@
+
+=== WsDiscovery ===
+### desc ###
+library implements ONVIF/Discovery protocol; library interface described in WsddLib.h
+### prerequisites ###
+library require gsoap 2.8.15 installed;
+gsoap (!) should be built with the -fPIC compiler flag
+### build ###
+mkdir WsDiscovery-build
+cd  WsDiscovery-build
+cmake ../WsDiscovery
+make
+

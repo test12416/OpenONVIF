@@ -1,0 +1,17 @@
+
+=== OnvifTestServer ===
+### desc ###
+  It is a simple Onvif Server, which implements GetSystemDateAndTime command of the DeviceManagement Service;
+  and performs OnvifSDK in the local network.
+### prerequisites ###
+* build OnvifSDK
+ 
+### build ###
+mkdir OnvifServer-build
+cd OnvifServer-build
+cmake ../OnvifServer -DSDK="../../path/to/OnvifSDK-build"
+make
+
+### run ###
+./OnvifTestServer 
+

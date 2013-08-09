@@ -1,0 +1,15 @@
+
+=== OnvifTestClient ===
+### desc ###
+  It is a simple Onvif client, which use DeviceManagement Service of the Server and performs WsDiscovery in the local network.
+### prerequisites ###
+* build OnvifSDK
+ 
+### build ###
+mkdir OnvifClient-build
+cd OnvifClient-build
+cmake ../OnvifClient -DSDK="../../path/to/OnvifSDK-build"
+make
+
+### run ###
+./OnvifTestClient 
