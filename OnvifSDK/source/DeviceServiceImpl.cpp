@@ -1,8 +1,8 @@
-
 #include "sigrlog.h"
 #include "DeviceServiceImpl.h"
 #include "BaseServer.h"
 
+namespace Web {
 int DeviceServiceImpl::GetSystemDateAndTime(_tds__GetSystemDateAndTime *tds__GetSystemDateAndTime, _tds__GetSystemDateAndTimeResponse *tds__GetSystemDateAndTimeResponse)
 {
 	DevGetSystemDateAndTimeResponse dt(tds__GetSystemDateAndTimeResponse);
@@ -77,3 +77,4 @@ int DeviceServiceImpl::GetServices(_tds__GetServices *tds__GetServices, _tds__Ge
 
 	return 0;	
 }
+} // namespace Web

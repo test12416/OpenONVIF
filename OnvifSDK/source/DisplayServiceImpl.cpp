@@ -1,9 +1,8 @@
-
 #include "sigrlog.h"
 #include "DisplayServiceImpl.h"
 #include "BaseServer.h"
 
-// for while not supporting copy
+namespace Web {
 DisplayBindingService *DisplayServiceImpl::copy()
 {
 	return NULL;
@@ -57,3 +56,4 @@ int DisplayServiceImpl::CreatePaneConfiguration(_tls__CreatePaneConfiguration *t
        // FIXME NO RESP SETTING
     CHECKRETURN(iRet, "DisplayServiceImpl::CreatePaneConfiguration");
 }
+} // namespace Web

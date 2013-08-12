@@ -1,4 +1,6 @@
-
 #include "OnvifSDK.h"
 #include "commonTypes.h"
-#include "soapReplayBindingProxy.h"
+#include "WebReplayBindingProxy.h"
+
+namespace Web {
+} // namespace Web

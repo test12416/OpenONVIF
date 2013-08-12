@@ -4,5 +4,5 @@
 
 IWsdd * getWsdd()
 {
-	return Wsdd::Instance();
+    return Wsdd::Wsdd::Instance();
 }

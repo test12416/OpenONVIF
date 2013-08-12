@@ -1,19 +1,20 @@
 #ifndef WSDD_HPP
 #define WSDD_HPP
 
-#include <onvifxx/remotediscovery.hpp>
+#include <remotediscovery.hpp>
 
 #include "WsddLib.h"
 #include <vector>
 #include <string>
 #include <sstream>
 #include <algorithm>
+#include <tr1/memory>
 
 class Wsdd : public IWsdd,
-        public onvifxx::RemoteDiscovery
+        public RemoteDiscovery
 {
-    typedef onvifxx::Proxy<onvifxx::RemoteDiscovery> Proxy_t;
-    typedef onvifxx::Service<onvifxx::RemoteDiscovery> Service_t;
+    typedef Proxy<RemoteDiscovery> Proxy_t;
+    typedef Service<RemoteDiscovery> Service_t;
 
 public:
     virtual ~Wsdd();
@@ -54,7 +55,7 @@ private:
 
     std::vector<std::string> scopes_;
     ProbeMatches_t probeMatches_;
-    std::shared_ptr<Proxy_t> proxy_;
+    std::tr1::shared_ptr<Proxy_t> proxy_;
 
     std::vector<std::string> members_;
 };

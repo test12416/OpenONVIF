@@ -1,9 +1,8 @@
-#include <onvifxx/onvifxx.hpp>
+#include <onvifxx.hpp>
 #include <WsddH.h>
 
 struct Namespace namespaces[] = {};
 
-namespace onvifxx {
 
 Exception::Exception()
 {
@@ -32,7 +31,7 @@ const char * Exception::what() const throw()
 SoapException::SoapException(soap * s) :
     code_(-1)
 {
-    if (s != nullptr) {
+    if (s != NULL) {
         char buf[1024];
         soap_sprint_fault(s, buf, sizeof(buf));
         message().assign(buf);
@@ -61,5 +60,3 @@ int UnixException::code() const
 {
     return code_;
 }
-
-} // namespace onvifxx

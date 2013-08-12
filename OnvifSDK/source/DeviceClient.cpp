@@ -1,7 +1,7 @@
 
-
 #include "DeviceClient.h"
 
+namespace Web {
 DeviceClient::DeviceClient(const char * pchAdress, soap * s):m_proxy(s)
 {
 	m_proxy.soap_endpoint = pchAdress;
@@ -66,3 +66,4 @@ int DeviceClient::GetServices(DevGetServicesResponse & resp)
 
 	CHECKRETURN(nRes, "DeviceClient::GetServices");
 }
+} // namespace Web

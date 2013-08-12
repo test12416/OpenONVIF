@@ -1,12 +1,10 @@
-#ifndef soapDisplayBindingServiceImpl_H
-#define soapDisplayBindingServiceImpl_H
+#ifndef WebDisplayBindingServiceImpl_H
+#define WebDisplayBindingServiceImpl_H
 
-#include "soapDisplayBindingService.h"
-
-
+#include "WebDisplayBindingService.h"
 class BaseServer;
 
-
+namespace Web {
 class DisplayServiceImpl : public DisplayBindingService
 {
 private:
@@ -50,5 +48,6 @@ public:
 	virtual	int DeletePaneConfiguration(_tls__DeletePaneConfiguration *tls__DeletePaneConfiguration, _tls__DeletePaneConfigurationResponse *tls__DeletePaneConfigurationResponse) {return SOAP_OK;};
 
 };
+} // namespace Web
+#endif // WebDisplayBindingServiceImpl_H
 
-#endif // soapDisplayBindingServiceImpl_H

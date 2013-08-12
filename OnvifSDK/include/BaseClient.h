@@ -13,6 +13,8 @@
 
 #include "WsddLib.h"
 
+using namespace Web;
+
 class BaseClient: IOnvifClient
 {
 public:

@@ -1,8 +1,7 @@
 #include "wsa.hpp"
 //#include <wsaapi.h>
 
-namespace {
-
+namespace  {
 /** Anonymous Reply/To endpoint address */
 static const std::string ANONYMOUS_URI = "http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous";
 /** Specifies no Reply endpoint address (no reply) */
@@ -30,7 +29,7 @@ int wsaError(soap * s, wsa__FaultSubcodeValues fault)
     return SOAP_FAULT;
 }
 
-} // anonymous namespace
+};
 
 
 Wsa::Wsa(struct soap * soap) :
@@ -47,7 +46,7 @@ Wsa::~Wsa()
 
 uint & Wsa::instanceId()
 {
-    static uint rv = time(nullptr);
+    static uint rv = time(NULL);
     return rv;
 }
 
@@ -91,7 +90,7 @@ std::string Wsa::randUuid()
 #endif
     r3 = soap_random;
     r4 = soap_random;
-    std::sprintf(rv, "uuid:%8.8x-%4.4hx-4%3.3hx-%4.4hx-%4.4hx%8.8x",
+    sprintf(rv, "uuid:%8.8x-%4.4hx-4%3.3hx-%4.4hx-%4.4hx%8.8x",
             r1, (short)(r2 >> 16), (short)r2 >> 4,
             ((short)(r3 >> 16) & 0x3FFF) | 0x8000, (short)r3, r4);
 
@@ -101,7 +100,7 @@ std::string Wsa::randUuid()
 int Wsa::allocHeader()
 {
     soap_header(soap_);
-    if (soap_->header != nullptr)
+    if (soap_->header != NULL)
         return SOAP_OK;
 
     return (soap_->error = SOAP_EOM);
@@ -109,7 +108,7 @@ int Wsa::allocHeader()
 
 int Wsa::check() const
 {
-    if (soap_->header == nullptr || soap_->header->SOAP_WSA(Action).empty())
+    if (soap_->header == NULL || soap_->header->SOAP_WSA(Action).empty())
         return wsaError(soap_, wsa__FaultSubcodeValues__wsa__MessageInformationHeaderRequired);
 
     return SOAP_OK;
@@ -117,7 +116,7 @@ int Wsa::check() const
 
 int Wsa::addFrom(const std::string & from)
 {
-    if (soap_->header == nullptr)
+    if (soap_->header == NULL)
         return SOAP_ERR;
 
     soap_->header->SOAP_WSA(From) = new wsa__EndpointReferenceType;
@@ -133,7 +132,7 @@ int Wsa::addNoReply()
 
 int Wsa::addReplyTo(const std::string & replyTo)
 {
-    if (soap_->header == nullptr)
+    if (soap_->header == NULL)
         return SOAP_ERR;
 
     if (!replyTo.empty()) {
@@ -147,7 +146,7 @@ int Wsa::addReplyTo(const std::string & replyTo)
 
 int Wsa::addFaultTo(const std::string & faultTo)
 {
-    if (soap_->header == nullptr)
+    if (soap_->header == NULL)
         return SOAP_ERR;
 
     if (!faultTo.empty()) {
@@ -161,7 +160,7 @@ int Wsa::addFaultTo(const std::string & faultTo)
 
 int Wsa::addRelatesTo(const std::string & relatesTo)
 {
-    if (soap_->header == nullptr)
+    if (soap_->header == NULL)
         return SOAP_ERR;
 
     if (!relatesTo.empty()) {
@@ -185,10 +184,10 @@ int Wsa::addAppSequence(std::string * id)
 int Wsa::reply(const std::string & id, const std::string & action)
 {
 //    struct SOAP_ENV__Header * oldheader = soap_->header;
-//    soap_->header = nullptr;
+//    soap_->header = NULL;
 
 //    /* if endpoint address for reply is 'none' return immediately */
-//    if (oldheader != nullptr && oldheader->SOAP_WSA(ReplyTo) && oldheader->SOAP_WSA(ReplyTo)->Address
+//    if (oldheader != NULL && oldheader->SOAP_WSA(ReplyTo) && oldheader->SOAP_WSA(ReplyTo)->Address
 //            && !strcmp(oldheader->SOAP_WSA(ReplyTo)->Address, NONE_URI))
 //    {
 //        return soap_send_empty_response(soap_, SOAP_OK);
@@ -199,16 +198,16 @@ int Wsa::reply(const std::string & id, const std::string & action)
 //        return soap_->error;
 
 //    struct SOAP_ENV__Header * newheader = soap_->header;
-//    if (oldheader != nullptr)
+//    if (oldheader != NULL)
 //        *newheader = *oldheader;
 
 //    newheader->SOAP_WSA(MessageID) = id;
 //    newheader->SOAP_WSA(Action) = action;
-//    newheader->SOAP_WSA(RelatesTo) = nullptr;
-//    newheader->SOAP_WSA(From) = nullptr;
-//    newheader->SOAP_WSA(To) = nullptr;
-//    newheader->SOAP_WSA(ReplyTo) = nullptr;
-//    newheader->SOAP_WSA(FaultTo) = nullptr;
+//    newheader->SOAP_WSA(RelatesTo) = NULL;
+//    newheader->SOAP_WSA(From) = NULL;
+//    newheader->SOAP_WSA(To) = NULL;
+//    newheader->SOAP_WSA(ReplyTo) = NULL;
+//    newheader->SOAP_WSA(FaultTo) = NULL;
 
 
 //    if (oldheader && oldheader->SOAP_WSA(MessageID)) {
@@ -274,10 +273,9 @@ int Wsa::request(const std::string & to, const std::string & action)
     soap_->header->SOAP_WSA(MessageID) = randUuid();
     soap_->header->SOAP_WSA(To) = to.empty() ? ANONYMOUS_URI : to;
     soap_->header->SOAP_WSA(Action) = action;
-    soap_->header->SOAP_WSA(RelatesTo) = nullptr;
-    soap_->header->SOAP_WSA(From) = nullptr;
-    soap_->header->SOAP_WSA(ReplyTo) = nullptr;
-    soap_->header->SOAP_WSA(FaultTo) = nullptr;
+    soap_->header->SOAP_WSA(RelatesTo) = NULL;
+    soap_->header->SOAP_WSA(From) = NULL;
+    soap_->header->SOAP_WSA(ReplyTo) = NULL;
+    soap_->header->SOAP_WSA(FaultTo) = NULL;
     return check();
 }
-

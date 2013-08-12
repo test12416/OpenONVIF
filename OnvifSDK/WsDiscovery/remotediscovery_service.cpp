@@ -1,10 +1,8 @@
 #include "sigrlog.h"
-#include <onvifxx/remotediscovery.hpp>
+#include <remotediscovery.hpp>
 #include <WsddRemoteDiscoveryBindingService.h>
 #include "wsa.hpp"
 #include <assert.h>
-
-namespace onvifxx {
 
 class RemoteDiscoveryService :
     public BaseService<RemoteDiscovery, RemoteDiscoveryBindingService>
@@ -22,29 +20,29 @@ class RemoteDiscoveryService :
             T::types = arg.Types;
             T::xaddrs = arg.XAddrs;
 
-            T::scopes = nullptr;
-            if (arg.Scopes != nullptr) {
+            T::scopes = NULL;
+            if (arg.Scopes != NULL) {
                 T::scopes = &scopes_;
                 T::scopes->item = arg.Scopes->__item;
                 T::scopes->matchBy = arg.Scopes->MatchBy;
             }
 
-            T::endpoint = nullptr;
-            if (arg.wsa__EndpointReference != nullptr) {
+            T::endpoint = NULL;
+            if (arg.wsa__EndpointReference != NULL) {
                 T::endpoint = &endpoint_;
 
-                T::endpoint->address = nullptr;
-                if (arg.wsa__EndpointReference->Address != nullptr) {
+                T::endpoint->address = NULL;
+                if (arg.wsa__EndpointReference->Address != NULL) {
                     T::endpoint->address = &arg.wsa__EndpointReference->Address->__item;
                 }
 
-                T::endpoint->portType = nullptr;
-                if (arg.wsa__EndpointReference->PortType != nullptr) {
+                T::endpoint->portType = NULL;
+                if (arg.wsa__EndpointReference->PortType != NULL) {
                     T::endpoint->address = &arg.wsa__EndpointReference->PortType->__item;
                 }
 
-                T::endpoint->serviceName = nullptr;
-                if (arg.wsa__EndpointReference->ServiceName != nullptr) {
+                T::endpoint->serviceName = NULL;
+                if (arg.wsa__EndpointReference->ServiceName != NULL) {
                     T::endpoint->serviceName = &service_;
                     T::endpoint->serviceName->item = arg.wsa__EndpointReference->ServiceName->__item;
                     T::endpoint->serviceName->portName = arg.wsa__EndpointReference->ServiceName->PortName;
@@ -93,7 +91,7 @@ public:
 
         soap_mode(RemoteDiscoveryBindingService::soap, SOAP_IO_UDP | SOAP_XML_IGNORENS);
 
-        int socket = RemoteDiscoveryBindingService::bind(nullptr, port, 100);
+        int socket = RemoteDiscoveryBindingService::bind(NULL, port, 100);
         if (!soap_valid_socket(socket))
             return SOAP_INVALID_SOCKET;
 
@@ -129,7 +127,7 @@ public:
             }
 
         } catch (std::exception & ex) {
-            RemoteDiscoveryBindingService::soap_senderfault("RemoteDiscovery", ex.what(), nullptr);
+            RemoteDiscoveryBindingService::soap_senderfault("RemoteDiscovery", ex.what(), NULL);
             return SOAP_FAULT;
         }
 
@@ -140,9 +138,9 @@ public:
 
     virtual int Hello(wsd__HelloType * wsd__Hello, wsd__ResolveType * wsd__HelloResponse)
     {
-        assert(wsd__Hello != nullptr && wsd__HelloResponse != nullptr);
+        assert(wsd__Hello != NULL && wsd__HelloResponse != NULL);
 
-        if (p != nullptr) {
+        if (p != NULL) {
             Arg<RemoteDiscovery::Hello_t> arg(RemoteDiscoveryBindingService::soap, *wsd__Hello);
             arg.version = wsd__Hello->MetadataVersion;
             p->hello(arg);
@@ -155,9 +153,9 @@ public:
 
     virtual int Bye(wsd__ByeType * wsd__Bye, wsd__ResolveType * dn__ByeResponse)
     {
-        assert(wsd__Bye != nullptr && dn__ByeResponse != nullptr);
+        assert(wsd__Bye != NULL && dn__ByeResponse != NULL);
 
-        if (p != nullptr) {
+        if (p != NULL) {
             Arg<RemoteDiscovery::Bye_t> arg(RemoteDiscoveryBindingService::soap, *wsd__Bye);
 
             arg.version = wsd__Bye->MetadataVersion ? *wsd__Bye->MetadataVersion : 0;
@@ -171,15 +169,15 @@ public:
 
     virtual int Probe(wsd__ProbeType * wsd__Probe, wsd__ProbeMatchesType * wsd__ProbeResponse)
     {
-        assert(wsd__Probe != nullptr && wsd__ProbeResponse != nullptr);
+        assert(wsd__Probe != NULL && wsd__ProbeResponse != NULL);
 
-        if (p != nullptr) {
+        if (p != NULL) {
             RemoteDiscovery::Probe_t arg;
             RemoteDiscovery::Scopes_t scopes;
 
             arg.types = wsd__Probe->Types;
-            arg.scopes = nullptr;
-            if (wsd__Probe->Scopes != nullptr) {
+            arg.scopes = NULL;
+            if (wsd__Probe->Scopes != NULL) {
                 arg.scopes = &scopes;
                 arg.scopes->item = wsd__Probe->Scopes->__item;
                 arg.scopes->matchBy = wsd__Probe->Scopes->MatchBy;
@@ -241,7 +239,7 @@ public:
 //private:
 //    int serveProbeMatches()
 //    {
-//        if (p != nullptr) {
+//        if (p != NULL) {
 //            p->probeMatches(RemoteDiscovery::ProbeMatches_t(), std::string());
 //        }
 
@@ -250,8 +248,8 @@ public:
 
 //    int putProbeMatches(const wsd__ProbeMatchesType * a, const char * tag)
 //    {
-//        int id = soap_element_id(this, tag, -1, a, nullptr, 0, nullptr, SOAP_TYPE_wsd__ProbeMatchesType);
-//        return (id < 0) ? error : a->soap_out(this, tag, id, nullptr);
+//        int id = soap_element_id(this, tag, -1, a, NULL, 0, NULL, SOAP_TYPE_wsd__ProbeMatchesType);
+//        return (id < 0) ? error : a->soap_out(this, tag, id, NULL);
 //    }
 
 
@@ -445,8 +443,8 @@ private:
 //        throw SoapException(impl_);
 
 //    impl_->checkHeader("ProbeMatches wrong header");
-//    if (res.wsd__ProbeMatches == nullptr) {
-//        if (soap_wsa_sender_fault(impl_, "WSDD ProbeMatches incomplete", nullptr) == 0)
+//    if (res.wsd__ProbeMatches == NULL) {
+//        if (soap_wsa_sender_fault(impl_, "WSDD ProbeMatches incomplete", NULL) == 0)
 //            throw SoapException(impl_);
 //    }
 
@@ -476,8 +474,8 @@ private:
 //        throw SoapException(impl_);
 
 //    impl_->checkHeader("WSDD ResolveMatches header incomplete");
-//    if (res.wsd__ResolveMatches == nullptr || res.wsd__ResolveMatches->ResolveMatch == nullptr)
-//        if (soap_wsa_sender_fault(impl_, "WSDD ResolveMatches incomplete", nullptr) == 0)
+//    if (res.wsd__ResolveMatches == NULL || res.wsd__ResolveMatches->ResolveMatch == NULL)
+//        if (soap_wsa_sender_fault(impl_, "WSDD ResolveMatches incomplete", NULL) == 0)
 //            throw SoapException(impl_);
 
 //    auto resolve_match = res.wsd__ResolveMatches->ResolveMatch;
@@ -495,8 +493,6 @@ Service<RemoteDiscovery> * RemoteDiscovery::service()
 {
     return new RemoteDiscoveryService();
 }
-
-} // namespace onvifxx
 
 //int Discovery::listen(int timeout)
 //{

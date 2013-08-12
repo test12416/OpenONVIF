@@ -3,8 +3,9 @@
 
 #include "sigrlog.h"
 #include "OnvifSDK.h"
-#include "soapRecordingBindingProxy.h"
+#include "WebRecordingBindingProxy.h"
 
+namespace Web {
 class RecordingClient
 {
 public:
@@ -19,5 +20,5 @@ public:
 private:
     RecordingBindingProxy m_proxy;
 };
-
+} // namespace Web
 #endif	// RECORDINGCLIENT_H

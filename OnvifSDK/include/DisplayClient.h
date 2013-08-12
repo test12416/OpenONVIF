@@ -3,7 +3,9 @@
 
 #include "sigrlog.h"
 #include "OnvifSDK.h"
-#include "soapDisplayBindingProxy.h"
+#include "WebDisplayBindingProxy.h"
+
+namespace Web {
 
 class DisplayClient
 {
@@ -19,5 +21,6 @@ public:
 private:
 	DisplayBindingProxy m_proxy;
 };
-
+} // namespace Web
 #endif	// DISPLAYCLIENT_H
+

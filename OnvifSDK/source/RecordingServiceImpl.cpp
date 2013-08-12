@@ -2,6 +2,7 @@
 #include "BaseServer.h"
 #include "RecordingServiceImpl.h"
 
+namespace Web {
 int RecordingServiceImpl::CreateRecordingJob (_trc__CreateRecordingJob *trc__CreateRecordingJob,
                                               _trc__CreateRecordingJobResponse *trc__CreateRecordingJobResponse)
 {
@@ -31,3 +32,4 @@ int RecordingServiceImpl::DeleteRecording (_trc__DeleteRecording *trc__DeleteRec
     RecDeleteRecording r(trc__DeleteRecording);
     return m_pBaseServer->DeleteRecording(r.getToken());
 }
+} // namespace Web

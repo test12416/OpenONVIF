@@ -1,6 +1,6 @@
-
 #include "ReceiverClient.h"
 
+namespace Web {
 ReceiverClient::ReceiverClient(const char * pchAdress, soap * s):m_proxy(s)
 {
 	m_proxy.soap_endpoint = pchAdress;
@@ -46,3 +46,4 @@ int ReceiverClient::SetReceiverMode(const std::string & recvToken, bool bMode)
     int nRes = m_proxy.SetReceiverMode(req.d, resp.d);
     CHECKRETURN(nRes, "ReceiverClient::SetReceiverMode");
 }
+} // namespace Web

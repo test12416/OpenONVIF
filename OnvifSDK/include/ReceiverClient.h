@@ -3,7 +3,9 @@
 
 #include "sigrlog.h"
 #include "OnvifSDK.h"
-#include "soapReceiverBindingProxy.h"
+#include "WebReceiverBindingProxy.h"
+
+namespace Web {
 
 class ReceiverClient
 {
@@ -18,5 +20,5 @@ public:
 private:
 	ReceiverBindingProxy m_proxy;
 };
-
+} // namespace Web
 #endif	// RECEIVERCLIENT_H

@@ -1,6 +1,8 @@
 
 #include "BaseServer.h"
 
+using namespace Web;
+
 static GeneratorInitializer generatorInitializer;
 
 std::string GenerateToken()

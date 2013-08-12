@@ -1,6 +1,6 @@
-
 #include "RecordingClient.h"
 
+namespace Web {
 RecordingClient::RecordingClient(const char * pchAdress, soap * s):m_proxy(s)
 {
     m_proxy.soap_endpoint = pchAdress;
@@ -40,3 +40,4 @@ int RecordingClient::DeleteRecordingJob (const std::string & token)
     int iRet = m_proxy.DeleteRecordingJob(r.d, resp.d);
     CHECKRETURN(iRet, "RecordingClient::DeleteRecordingJob");
 }
+} // namespace Web

@@ -1,11 +1,9 @@
-#include <onvifxx/remotediscovery.hpp>
+#include <remotediscovery.hpp>
 #include <WsddRemoteDiscoveryBindingProxy.h>
 #include <Wsdd.nsmap>
 #include "wsa.hpp"
 
 #include <sstream>
-
-namespace onvifxx {
 
 const std::string TO_TS_URL = "urn:schemas-xmlsoap-org:ws:2005:04:discovery";
 
@@ -37,7 +35,7 @@ public:
 
     static std::string toString(const char * s)
     {
-        return s == nullptr ? std::string() : std::string(s);
+        return s == NULL ? std::string() : std::string(s);
     }
 
 
@@ -52,16 +50,16 @@ public:
     void checkHeader(const std::string & faultMessage)
     {
         // check WSA
-        if (soap_header() == nullptr) {
+        if (soap_header() == NULL) {
             if (soap_sender_fault(RemoteDiscoveryBindingProxy::soap, "checkHeader", faultMessage.c_str()) != 0)
                 throw SoapException(RemoteDiscoveryBindingProxy::soap);
         }
 
-//        if (soap_header()->wsd__AppSequence != nullptr) {
+//        if (soap_header()->wsd__AppSequence != NULL) {
 //            wsd__AppSequenceType * seq = soap_header()->wsd__AppSequence;
 //            instanceId() = seq->InstanceId;
 //            messageNumber() = seq->MessageNumber;
-//            if (seq->SequenceId != nullptr)
+//            if (seq->SequenceId != NULL)
 //                sequenceId() = *seq->SequenceId;
 //        }
     }
@@ -75,7 +73,7 @@ public:
         // Body
         Wsa::Request<wsd__HelloType> req(RemoteDiscoveryBindingProxy::soap, arg);
         req.MetadataVersion = arg.version;
-        if (Hello(&req, nullptr) != 0)
+        if (Hello(&req, NULL) != 0)
             throw SoapException(RemoteDiscoveryBindingProxy::soap);
     }
 
@@ -87,11 +85,11 @@ public:
 
         // Body
         Wsa::Request<wsd__ByeType> req(RemoteDiscoveryBindingProxy::soap, arg);
-        req.Types = nullptr;
-        req.Scopes = nullptr;
-        req.XAddrs = nullptr;
+        req.Types = NULL;
+        req.Scopes = NULL;
+        req.XAddrs = NULL;
         //req.MetadataVersion = &arg.version;
-        if (Bye(&req, nullptr) != 0)
+        if (Bye(&req, NULL) != 0)
             throw SoapException(RemoteDiscoveryBindingProxy::soap);
     }
 
@@ -107,13 +105,13 @@ public:
 
         wsd__ScopesType req_scopes;
         req_scopes.soap_default(RemoteDiscoveryBindingProxy::soap);
-        if (arg.scopes != nullptr) {
+        if (arg.scopes != NULL) {
             req_scopes.__item = arg.scopes->item;
             req_scopes.MatchBy = arg.scopes->matchBy;
             req.Scopes = &req_scopes;
         }
 
-        if (Probe(&req, nullptr) != 0)
+        if (Probe(&req, NULL) != 0)
             throw SoapException(RemoteDiscoveryBindingProxy::soap);
     }
 
@@ -142,7 +140,7 @@ public:
 //            req.ProbeMatch[i] = &matches.back();
 //        }
 
-//        encodingStyle = nullptr;
+//        encodingStyle = NULL;
 //        soap_begin(this);
 //        soap_serializeheader(this);
 //        if (!soap_reference(this, &req, SOAP_TYPE_wsd__ProbeMatchesType))
@@ -164,7 +162,7 @@ public:
 //        if (soap_end_count(this))
 //            throw SoapException(this);
 
-//        if (soap_connect(this, soap_url(this, soap_endpoint, nullptr), soap_header()->wsa__Action.c_str())
+//        if (soap_connect(this, soap_url(this, soap_endpoint, NULL), soap_header()->wsa__Action.c_str())
 //         || soap_envelope_begin_out(this)
 //         || soap_putheader(this)
 //         || soap_body_begin_out(this)
@@ -373,8 +371,8 @@ private:
 //        throw SoapException(impl_);
 
 //    impl_->checkHeader("ProbeMatches wrong header");
-//    if (res.wsd__ProbeMatches == nullptr) {
-//        if (soap_wsa_sender_fault(impl_, "WSDD ProbeMatches incomplete", nullptr) == 0)
+//    if (res.wsd__ProbeMatches == NULL) {
+//        if (soap_wsa_sender_fault(impl_, "WSDD ProbeMatches incomplete", NULL) == 0)
 //            throw SoapException(impl_);
 //    }
 
@@ -404,8 +402,8 @@ private:
 //        throw SoapException(impl_);
 
 //    impl_->checkHeader("WSDD ResolveMatches header incomplete");
-//    if (res.wsd__ResolveMatches == nullptr || res.wsd__ResolveMatches->ResolveMatch == nullptr)
-//        if (soap_wsa_sender_fault(impl_, "WSDD ResolveMatches incomplete", nullptr) == 0)
+//    if (res.wsd__ResolveMatches == NULL || res.wsd__ResolveMatches->ResolveMatch == NULL)
+//        if (soap_wsa_sender_fault(impl_, "WSDD ResolveMatches incomplete", NULL) == 0)
 //            throw SoapException(impl_);
 
 //    auto resolve_match = res.wsd__ResolveMatches->ResolveMatch;
@@ -424,7 +422,6 @@ Proxy<RemoteDiscovery> * RemoteDiscovery::proxy()
     return new RemoteDiscoveryProxy;
 }
 
-} // namespace onvifxx
 
 //int Discovery::listen(int timeout)
 //{

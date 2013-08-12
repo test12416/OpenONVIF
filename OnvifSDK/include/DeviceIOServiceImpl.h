@@ -1,11 +1,10 @@
-#ifndef soapDeviceIOBindingServiceImpl_H
-#define soapDeviceIOBindingServiceImpl_H
+#ifndef WebDeviceIOBindingServiceImpl_H
+#define WebDeviceIOBindingServiceImpl_H
 
-#include "soapDeviceIOBindingService.h"
-
+#include "WebDeviceIOBindingService.h"
 class BaseServer;
 
-
+namespace Web {
 class DeviceIOServiceImpl : public DeviceIOBindingService
 {
 private:
@@ -99,4 +98,5 @@ public:
 	/// Web service operation 'SendReceiveSerialCommand' (returns error code or SOAP_OK)
 	virtual	int SendReceiveSerialCommand(_tmd__SendReceiveSerialCommand *tmd__SendReceiveSerialCommand, _tmd__SendReceiveSerialCommandResponse *tmd__SendReceiveSerialCommandResponse) {return SOAP_OK;};
 };
-#endif // soapDeviceIOBindingServiceImpl_H
+}; // namespace Web
+#endif // WebDeviceIOBindingServiceImpl_H

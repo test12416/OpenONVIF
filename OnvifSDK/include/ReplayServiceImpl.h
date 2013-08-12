@@ -1,12 +1,9 @@
 #ifndef ReplayServiceImpl_H
 #define ReplayServiceImpl_H
 
-#include "soapReplayBindingService.h"
-
-
+#include "WebReplayBindingService.h"
 class BaseServer;
-
-
+namespace Web {
 class ReplayServiceImpl : public ReplayBindingService
 {
 private:
@@ -34,5 +31,5 @@ public:
 
 
 };
-
+} // namespace Web
 #endif // ReplayServiceImpl

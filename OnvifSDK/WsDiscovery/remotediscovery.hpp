@@ -3,8 +3,6 @@
 
 #include "onvifxx.hpp"
 
-namespace onvifxx {
-
 static const char WSDD_MULTICAT_IP[] = "239.255.255.250";
 static const int WSDD_MULTICAT_PORT = 3702;
 
@@ -55,7 +53,5 @@ struct RemoteDiscovery
     static Proxy<RemoteDiscovery> * proxy();
     static Service<RemoteDiscovery> * service();
 };
-
-} // namespace onvifxx
 
 #endif // ONVIF_DISCOVERY_HPP

@@ -19,7 +19,7 @@
 # define SOAP_WSA__(prefix,member) prefix##wsa__##member
 #endif
 
-#include <onvifxx/onvifxx.hpp>
+#include <onvifxx.hpp>
 #include <WsddH.h>
 
 class Wsa
@@ -42,7 +42,7 @@ public:
     int addReplyTo(const std::string & replyTo);
     int addFaultTo(const std::string & faultTo);
     int addRelatesTo(const std::string & relatesTo);
-    int addAppSequence(std::string * id = nullptr);
+    int addAppSequence(std::string * id = NULL);
 
     int reply(const std::string & id, const std::string & action);
     int request(const std::string & to, const std::string & action);
@@ -59,28 +59,28 @@ public:
             T::Types = arg.types;
             T::XAddrs = arg.xaddrs;
 
-            if (arg.scopes != nullptr) {
+            if (arg.scopes != NULL) {
                 T::Scopes = &scopes_;
                 T::Scopes->soap_default(soap);
                 T::Scopes->__item = arg.scopes->item;
                 T::Scopes->MatchBy = arg.scopes->matchBy;
             }
 
-            if (arg.endpoint != nullptr) {
+            if (arg.endpoint != NULL) {
                 T::wsa__EndpointReference = &endpoint_;
                 T::wsa__EndpointReference->soap_default(soap);
-                if (arg.endpoint->address != nullptr) {
+                if (arg.endpoint->address != NULL) {
                     T::wsa__EndpointReference->Address = &address_;
                     T::wsa__EndpointReference->Address->soap_default(soap);
                     T::wsa__EndpointReference->Address->__item = *arg.endpoint->address;
                 }
-                if (arg.endpoint->portType != nullptr) {
+                if (arg.endpoint->portType != NULL) {
                     T::wsa__EndpointReference->PortType = &port_;
                     T::wsa__EndpointReference->PortType->soap_default(soap);
                     T::wsa__EndpointReference->PortType->__item = *arg.endpoint->portType;
                 }
 
-                if (arg.endpoint->serviceName != nullptr) {
+                if (arg.endpoint->serviceName != NULL) {
                     T::wsa__EndpointReference->ServiceName = &service_;
                     T::wsa__EndpointReference->ServiceName->soap_default(soap);
                     T::wsa__EndpointReference->ServiceName->__item = arg.endpoint->serviceName->item;
@@ -101,5 +101,4 @@ private:
     soap * soap_;
     wsd__AppSequenceType sequence_;
 };
-
 #endif // ONVIFXX_WSDD_HPP

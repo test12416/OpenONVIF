@@ -3,7 +3,8 @@
 #include "ReceiverServiceImpl.h"
 #include "BaseServer.h"
 
-// for while not supporting copy
+namespace Web {
+#warning TODO for while not supporting copy
 ReceiverBindingService* ReceiverServiceImpl::copy()
 {
         return NULL;
@@ -39,3 +40,4 @@ int ReceiverServiceImpl::SetReceiverMode(_trv__SetReceiverMode *trv__SetReceiver
     int nRes = m_pBaseServer->SetReceiverMode( req.getToken(), req.getMode() );
     CHECKRETURN(nRes, "ReceiverServiceImpl::SetReceiverMode");
 }
+} // namespace Web

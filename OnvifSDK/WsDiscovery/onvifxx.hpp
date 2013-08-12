@@ -26,8 +26,6 @@ struct soap;
     } nullptr = {};                     // and whose name is nullptr
 #endif
 
-namespace onvifxx {
-
 class Exception : public std::exception
 {
 public:
@@ -94,7 +92,7 @@ struct BaseService : Service<T>, I
 
     BaseService()
     {
-        p = nullptr;
+        p = NULL;
     }
 
     virtual int bind(T * obj, int port)
@@ -102,7 +100,7 @@ struct BaseService : Service<T>, I
         p = obj;
         if (port == 0)
             port = 80;
-        return I::bind(nullptr, port, 100);
+        return I::bind(NULL, port, 100);
     }
 
     virtual	int serve()
@@ -130,7 +128,5 @@ struct BaseService : Service<T>, I
 //private:
 //    std::shared_ptr<T> p_;
 //};
-
-} // namespace onvifxx
 
 #endif //ONVIFXX_H

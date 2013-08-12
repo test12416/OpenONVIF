@@ -14,6 +14,8 @@
 #include "RecordingServiceImpl.h"
 #include "SearchServiceImpl.h"
 
+using namespace Web;
+
 class BaseServer : public IOnvifServer,
                     public IOnvif
 {

@@ -14,8 +14,10 @@ add_definitions(-DSIGRLOG_OUTPUT=1)
 add_definitions(-DSIGRLOG_FILENAME=\"oxxServerLog.ini\")
 
 find_library(SDKLIB OnvifSDK ${SDK})
-message(STATUS ${SDKLIB})
-link_directories(${SDK})
+if( SDKLIB STREQUAL "SDKLIB-NOTFOUND" )
+    message(FATAL_ERROR "OnvifSDK library wasn't provided")
+endif()
+message(STATUS "OSDK Library : ${SDKLIB}")
 
 include_directories(${PROJECT_SOURCE_DIR}/../../common
                     ${PROJECT_SOURCE_DIR}/../../OnvifSDK/include
@@ -32,3 +34,4 @@ set(SOURCES		${PROJECT_SOURCE_DIR}/mainServ.cpp
 add_executable(OnvifTestServer  ${HEADERS} ${SOURCES})
 
 target_link_libraries(OnvifTestServer ${SDKLIB} pthread)
+

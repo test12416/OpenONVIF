@@ -1,8 +1,9 @@
 
 #include "OnvifSDK.h"
 #include "commonTypes.h"
-#include "soapReceiverBindingProxy.h"
+#include "WebReceiverBindingProxy.h"
 
+namespace Web {
 #define EXTRA_CONSTRUCT() \
 {\
 }
@@ -120,3 +121,4 @@ void RecvSetReceiverMode::setToken( const std::string & str)
 {
     d->ReceiverToken = str;
 }
+} // namespace Web

@@ -3,8 +3,9 @@
 
 #include "sigrlog.h"
 #include "OnvifSDK.h"
-#include "soapDeviceIOBindingProxy.h"
+#include "WebDeviceIOBindingProxy.h"
 
+namespace Web {
 class DeviceIOClient
 {
 public:
@@ -16,5 +17,5 @@ public:
 private:
 	DeviceIOBindingProxy m_proxy;
 };
-
+} // namespace Web
 #endif	// DEVICEIOCLIENT_H

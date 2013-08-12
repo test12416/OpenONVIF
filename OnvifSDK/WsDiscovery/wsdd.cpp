@@ -48,10 +48,10 @@ int Wsdd::stop()
 void Wsdd::hello(const Hello_t & arg)
 {
     SIGRLOG( SIGRDEBUG2,  "hello ( %s, %s, %s)",
-              (arg.xaddrs != nullptr ? arg.xaddrs->c_str() : ""),
-              (arg.types != nullptr ?  arg.types->c_str() : ""),
-              (arg.scopes != nullptr ? arg.scopes->item.c_str() : ""));
-    if(arg.xaddrs != nullptr && !arg.xaddrs->empty())
+              (arg.xaddrs != NULL ? arg.xaddrs->c_str() : ""),
+              (arg.types != NULL ?  arg.types->c_str() : ""),
+              (arg.scopes != NULL ? arg.scopes->item.c_str() : ""));
+    if(arg.xaddrs != NULL && !arg.xaddrs->empty())
     {
         if (std::find(members_.begin(), members_.end(), *arg.xaddrs) == members_.end())
             members_.push_back(arg.xaddrs->c_str());
@@ -61,19 +61,19 @@ void Wsdd::hello(const Hello_t & arg)
 void Wsdd::bye(const Bye_t & arg)
 {
     SIGRLOG( SIGRDEBUG2,  "bye ( %s, %s, %s)",
-              (arg.xaddrs != nullptr ? arg.xaddrs->c_str() : ""),
-              (arg.types != nullptr ? arg.types->c_str() : ""),
-              (arg.scopes != nullptr ? arg.scopes->item.c_str() : ""));
+              (arg.xaddrs != NULL ? arg.xaddrs->c_str() : ""),
+              (arg.types != NULL ? arg.types->c_str() : ""),
+              (arg.scopes != NULL ? arg.scopes->item.c_str() : ""));
 }
 
 Wsdd::ProbeMatches_t  Wsdd::probe(const Probe_t & arg)
 {
     SIGRLOG( SIGRDEBUG2,  "probe ( %s, %s)",
-             (arg.types != nullptr ? arg.types->c_str() : ""),
-             (arg.scopes != nullptr ? arg.scopes->item.c_str() : ""));
+             (arg.types != NULL ? arg.types->c_str() : ""),
+             (arg.scopes != NULL ? arg.scopes->item.c_str() : ""));
 
     bool matched = true;
-    if (arg.types != nullptr && probeMatches_.back().types != nullptr) {
+    if (arg.types != NULL && probeMatches_.back().types != NULL) {
         std::string types = *arg.types;
         while (true) {
             std::size_t pos1 = types.rfind(':');
@@ -92,7 +92,7 @@ Wsdd::ProbeMatches_t  Wsdd::probe(const Probe_t & arg)
         matched = isMatched(types, *probeMatches_.back().types);
     }
 
-    if (matched && arg.scopes != nullptr && probeMatches_.back().scopes != nullptr)
+    if (matched && arg.scopes != NULL && probeMatches_.back().scopes != NULL)
         matched = isMatched(arg.scopes->item, probeMatches_.back().scopes->item);
 
     return matched ? probeMatches_ : Wsdd::ProbeMatches_t();
@@ -156,13 +156,13 @@ void Wsdd::runService()
         if(bIsDevice_)
         {
             SIGRLOG( SIGRDEBUG2,  "Sending hello" );
-            proxy_.reset(onvifxx::RemoteDiscovery::proxy());
+            proxy_.reset(RemoteDiscovery::proxy());
             proxy_->hello(probeMatches_.back());
         }
 
 
         SIGRLOG( SIGRDEBUG2,  "Starting the service loop" );
-        std::shared_ptr<Service_t> service(onvifxx::RemoteDiscovery::service());
+        std::tr1::shared_ptr<Service_t> service(RemoteDiscovery::service());
         service->bind(this);
 
         while (true) {
@@ -187,7 +187,7 @@ void Wsdd::runService()
             int err = service->serve();
             if (err != 0) {
                 if (err != -1) {
-                    SIGRLOG( SIGRWARNING,  "Serve failed :%s", onvifxx::SoapException(service->getSoap()).what() );
+                    SIGRLOG( SIGRWARNING,  "Serve failed :%s", SoapException(service->getSoap()).what() );
                 }
                 continue;
             }
@@ -199,7 +199,7 @@ void Wsdd::runService()
         if(bIsDevice_)
         {
             service.reset();
-            proxy_.reset(onvifxx::RemoteDiscovery::proxy());
+            proxy_.reset(RemoteDiscovery::proxy());
             proxy_->bye(probeMatches_.back());
         }
 
